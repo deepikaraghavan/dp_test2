@@ -1,5 +1,5 @@
 view: inventory_items {
-  sql_table_name: schema_looker.inventory_items ;;
+  sql_table_name: demo_db.inventory_items ;;
 
   dimension: id {
     primary_key: yes
@@ -28,6 +28,7 @@ view: inventory_items {
 
   dimension: product_id {
     type: number
+    # hidden: yes
     sql: ${TABLE}.product_id ;;
   }
 
@@ -47,6 +48,6 @@ view: inventory_items {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [id, products.item_name, products.id, order_items.count]
   }
 }
