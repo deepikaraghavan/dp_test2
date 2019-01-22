@@ -17,6 +17,21 @@ view: users {
     sql: ${TABLE}.city ;;
   }
 
+  parameter: city_parameter {
+    type: unquoted
+    suggest_dimension: city
+  }
+
+  measure: count_id_parameter {
+    type: count_distinct
+    sql: ${id} ;;
+    filters: {
+      field: city
+      value: "{% parameter city_parameter %}"
+    }
+
+  }
+
   dimension: country {
     type: string
     map_layer_name: countries
