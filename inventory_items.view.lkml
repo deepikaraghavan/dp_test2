@@ -24,6 +24,7 @@ view: inventory_items {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    allow_fill: no
   }
 
   dimension: product_id {

@@ -10,12 +10,23 @@ view: products {
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
+    html: <b><font size="4" color="#166088">{{value}}</font></b> ;;
+    required_access_grants: [dp_access_grant]
   }
-
+  dimension: brand_link {
+  type: string
+  sql: ${TABLE}.brand ;;
+  html: <a href="https://www.google.com/search?q={{value}}">{{value}}</a> ;;
+  }
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
     html: <a href="/dashboards/1821?Product Category={{ value }}">{{ value }}</a> ;;
+  }
+
+  dimension: orderstatus {
+    type: string
+    sql: ${deepika.status} ;;
   }
 
   dimension: categorylinktoexplore{
@@ -38,6 +49,11 @@ view: products {
     sql: ${TABLE}.rank ;;
   }
 
+  dimension: Days_from_Event_Today {
+    type: date
+    sql: CURDATE() ;;
+  }
+
   dimension: retail_price {
     type: number
     sql: ${TABLE}.retail_price ;;
@@ -50,9 +66,16 @@ view: products {
     html: <font color="green">{{rendered_value}}</font> ;;
   }
 
+  dimension: float_value_x_axis_test {
+    type: number
+    sql: ${TABLE}.retail_price*1.234566778889995
+#     value_format_name: decimal_2
+  }
+
   measure: retailprice {
-    type: sum
-    sql: ${retail_price} ;;
+    type: max
+    sql: ${TABLE}.retail_price ;;
+    value_format_name: decimal_2
     html:
     {% if value < 10 %}
     <font color="red">{{rendered_value}}</font>
@@ -69,6 +92,7 @@ view: products {
   dimension: sku {
     type: string
     sql: ${TABLE}.sku ;;
+    html: <div style="width:150px"> {{value}} </div> ;;
   }
 
   measure: count {

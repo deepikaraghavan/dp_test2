@@ -57,7 +57,13 @@ explore: aircraft_types {}
 
 explore: airport_remarks {}
 
-explore: airports {}
+explore: airports {
+  access_filter: {
+    field: airports.city
+    user_attribute: allowed_city_dp
+  }
+}
+
 
 explore: carriers {}
 

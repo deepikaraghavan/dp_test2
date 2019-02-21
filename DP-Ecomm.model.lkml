@@ -8,7 +8,10 @@ datagroup: test_folders_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
-
+# access_grant: dp_access_grant {
+#   user_attribute: dp_access_grant
+#   allowed_values: ["Rajan"]
+# }
 persist_with: test_folders_default_datagroup
 
 explore: events {
@@ -20,6 +23,7 @@ explore: events {
 }
 
 explore: inventory_items {
+  fields: [ALL_FIELDS*,-products.orderstatus]
   join: products {
     type: left_outer
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
@@ -28,6 +32,7 @@ explore: inventory_items {
 }
 
 explore: order_items {
+  fields: [ALL_FIELDS*,-products.orderstatus]
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
@@ -53,15 +58,18 @@ explore: order_items {
   }
 }
 
-explore: orders {
+explore: deepika {
+  from: orders
   join: users {
     type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
+    sql_on: ${deepika.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
 }
 
-explore: products {}
+explore: products {
+  fields: [ALL_FIELDS*,-products.orderstatus]
+  }
 
 explore: schema_migrations {}
 

@@ -40,6 +40,7 @@ view: airports {
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
+
   }
 
   dimension: cntl_twr {
