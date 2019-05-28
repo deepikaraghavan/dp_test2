@@ -26,7 +26,7 @@ view: orders {
     sql: ${TABLE}.status ;;
     link: {
       label: "clickme"
-      url: "/dashboards/1242"
+      url: "https://master.dev.looker.com/dashboards/1242?embed_domain=http://localhost:8000"
     }
   }
 
