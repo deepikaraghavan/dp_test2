@@ -24,6 +24,10 @@ view: orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+    link: {
+      label: "clickme"
+      url: "/dashboards/1242"
+    }
   }
 
   dimension: user_id {
