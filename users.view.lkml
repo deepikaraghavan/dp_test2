@@ -38,6 +38,11 @@ view: users {
     sql: ${TABLE}.country ;;
   }
 
+  dimension: country_bug_repro {
+    type: string
+    sql: CONCAT(${TABLE}.country, "_A_LONG_STRING_WITHOUT_SPACES") ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
