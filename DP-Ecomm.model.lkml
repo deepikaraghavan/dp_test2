@@ -2,18 +2,26 @@ connection: "thelook"
 
 # include all the views
 include: "*.view"
+include: "*.dashboard"
 # include: "schema_migrations/schema_migrations.view"
-
-datagroup: test_folders_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+access_grant: deepika1 {
+  allowed_values: ["yes"]
+  user_attribute: dp
+}
+access_grant: deepika2 {
+  allowed_values: ["yes"]
+  user_attribute: dp_access_grant
+}
+datagroup: dp_datagroup {
+  sql_trigger: SELECT CURDATE() ;;
   max_cache_age: "1 hour"
 }
 # access_grant: dp_access_grant {
 #   user_attribute: dp_access_grant
 #   allowed_values: ["Rajan"]
 # }
-persist_with: test_folders_default_datagroup
-
+# persist_with: test_folders_default_datagroup
+explore: extendedview {}
 explore: events {
   join: users {
     type: left_outer
@@ -21,6 +29,8 @@ explore: events {
     relationship: many_to_one
   }
 }
+
+
 
 explore: inventory_items {
   fields: [ALL_FIELDS*,-products.orderstatus]
@@ -54,6 +64,18 @@ explore: order_items {
   join: users {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+
+  join: derived_table {
+    type: left_outer
+    sql_on: ${orders.id} = ${derived_table.orders_id_dt} ;;
+    relationship: many_to_one
+
+  }
+  join: dt2_test {
+    type: left_outer
+    sql_on: ${derived_table.orders_id_dt}=${dt2_test.orders_id_dt2} ;;
     relationship: many_to_one
   }
 }

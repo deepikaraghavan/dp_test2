@@ -31,6 +31,7 @@ view: inventory_items {
     type: number
     # hidden: yes
     sql: ${TABLE}.product_id ;;
+    required_access_grants: [deepika1,deepika2]
   }
 
   dimension_group: sold {

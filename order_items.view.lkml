@@ -2,7 +2,7 @@ view: order_items {
   sql_table_name: demo_db.order_items ;;
 
   dimension: id {
-    primary_key: yes
+#     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -36,6 +36,11 @@ view: order_items {
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
+  }
+
+  dimension: can_i_reference_dt {
+    type: string
+    sql: ${derived_table.orders_id_dt} ;;
   }
 
   measure: count {
