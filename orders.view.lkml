@@ -79,7 +79,7 @@ view: orders {
     type: count
     filters: {
       field: status_satisfies_filter
-      value: "yes"
+      value: "no"
 #     link: {
 #       label: "clickme"
 #       url: "/dashboards/1242?embed_domain=https://localhost:8000"
