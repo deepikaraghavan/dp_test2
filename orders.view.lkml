@@ -9,7 +9,7 @@ view: orders {
 
   dimension: random_number {
     type: number
-    sql: round(rand(),2) ;;
+    sql: round(rand(),3) ;;
   }
 
   dimension_group: created {
