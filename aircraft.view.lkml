@@ -11,6 +11,8 @@ view: aircraft {
     sql: ${TABLE}.address2 ;;
   }
 
+  dimension: ASDFASDFASDF {}
+
   dimension_group: air_worth {
     type: time
     timeframes: [
